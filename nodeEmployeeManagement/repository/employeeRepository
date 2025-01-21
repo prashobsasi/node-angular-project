@@ -1,0 +1,41 @@
+const db = require('../config/db');
+
+const createEmployee = async (employee) => {
+  const query = 'INSERT INTO employee (name, empid, department) VALUES ($1, $2, $3) RETURNING *';
+  const values = [employee.name, employee.empid, employee.department];
+  const result = await db.query(query, values);
+  return result.rows[0];
+};
+
+const getAllEmployees = async () => {
+  const query = 'SELECT * FROM employee';
+  const result = await db.query(query);
+  return result.rows;
+};
+
+const getEmployeeById = async (id) => {
+  const query = 'SELECT * FROM employee WHERE id=$1';
+  const result = await db.query(query, [id]);
+  return result.rows[0];
+};
+
+const updateEmployee = async (id, employee) => {
+  const query = 'UPDATE employee SET name=$1, empid=$2, department=$3 WHERE id=$4 RETURNING *';
+  const values = [employee.name, employee.empid, employee.department, id];
+  const result = await db.query(query, values);
+  return result.rows[0];
+};
+
+const deleteEmployee = async (id) => {
+  const query = 'DELETE FROM employee WHERE id=$1 RETURNING *';
+  const result = await db.query(query, [id]);
+  return result.rows[0];
+};
+
+module.exports = {
+  createEmployee,
+  getAllEmployees,
+  getEmployeeById,
+  updateEmployee,
+  deleteEmployee,
+};

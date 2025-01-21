@@ -1,0 +1,41 @@
+const employeeRepository = require('../repository/employeeRepository');
+
+const createEmployee = async (employee) => {
+  return await employeeRepository.createEmployee(employee);
+};
+
+const getAllEmployees = async () => {
+  return await employeeRepository.getAllEmployees();
+};
+
+const getEmployeeById = async (id) => {
+  const employee = await employeeRepository.getEmployeeById(id);
+  if (!employee) {
+    throw new Error('Employee not found');
+  }
+  return employee;
+};
+
+const updateEmployee = async (id, employee) => {
+  const updatedEmployee = await employeeRepository.updateEmployee(id, employee);
+  if (!updatedEmployee) {
+    throw new Error('Employee not found');
+  }
+  return updatedEmployee;
+};
+
+const deleteEmployee = async (id) => {
+  const deletedEmployee = await employeeRepository.deleteEmployee(id);
+  if (!deletedEmployee) {
+    throw new Error('Employee not found');
+  }
+  return deletedEmployee;
+};
+
+module.exports = {
+  createEmployee,
+  getAllEmployees,
+  getEmployeeById,
+  updateEmployee,
+  deleteEmployee,
+};
