@@ -15,7 +15,7 @@ describe('Employee Controller', () => {
 
   describe('POST /employees/createEmployee', () => {
     it('should create a new employee', async () => {
-      const newEmployee = { name: 'John Doe', position: 'Developer' };
+      const newEmployee = { name: 'John Doe', empid: '123', department: 'HR' };
       employeeService.createEmployee.mockResolvedValue(newEmployee);
 
       const response = await request(app)
@@ -41,7 +41,7 @@ describe('Employee Controller', () => {
 
   describe('GET /employees/getEmployees', () => {
     it('should get all employees', async () => {
-      const employees = [{ id: 1, name: 'John Doe', position: 'Developer' }];
+      const employees = [{ id: 1, name: 'John Doe', empid: '123', department: 'HR' }];
       employeeService.getAllEmployees.mockResolvedValue(employees);
 
       const response = await request(app).get('/employees/getEmployees');
@@ -63,7 +63,7 @@ describe('Employee Controller', () => {
 
   describe('GET /employees/getEmployees/:id', () => {
     it('should get an employee by ID', async () => {
-      const employee = { id: 1, name: 'John Doe', position: 'Developer' };
+      const employee = { id: 1, name: 'John Doe', empid: '123', department: 'HR' };
       employeeService.getEmployeeById.mockResolvedValue(employee);
 
       const response = await request(app).get('/employees/getEmployees/1');
@@ -95,7 +95,7 @@ describe('Employee Controller', () => {
 
   describe('PUT /employees/updateEmployee/:id', () => {
     it('should update an employee by ID', async () => {
-      const updatedEmployee = { id: 1, name: 'John Doe', position: 'Lead Developer' };
+      const updatedEmployee = { id: 1, name: 'John Does', empid: '12345', department: 'Trade' };
       employeeService.updateEmployee.mockResolvedValue(updatedEmployee);
 
       const response = await request(app)
@@ -133,7 +133,7 @@ describe('Employee Controller', () => {
 
   describe('DELETE /employees/deleteEmployee/:id', () => {
     it('should delete an employee by ID', async () => {
-      const deletedEmployee = { id: 1, name: 'John Doe', position: 'Developer' };
+      const deletedEmployee = { id: 1, name: 'John Doe', empid: '123', department: 'HR' };
       employeeService.deleteEmployee.mockResolvedValue(deletedEmployee);
 
       const response = await request(app).delete('/employees/deleteEmployee/1');
